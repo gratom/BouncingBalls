@@ -12,6 +12,7 @@ public sealed class KeyboardController : AbstractController
         if (!IsInit)
         {
             coroutineInstance = StartCoroutine(ControllerCoroutine());
+            IsInit = true;
         }
     }
 

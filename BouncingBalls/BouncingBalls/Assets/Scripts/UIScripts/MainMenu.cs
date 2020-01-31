@@ -49,7 +49,7 @@ public class MainMenu : MonoBehaviour
 
     private void StartGameButtonClick()
     {
-        Debug.Log("Start");
+        SceneLoader.LoadScene(2);
     }
 
     private void SettingButtonClick()

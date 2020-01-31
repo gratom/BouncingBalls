@@ -5,8 +5,12 @@ using UnityEngine.UI;
 
 public sealed class JoystickController : AbstractController
 {
+#pragma warning disable
+
     [SerializeField] private VariableJoystick joystick;
     [SerializeField] private Button JumpButton;
+
+#pragma warning restore
 
     private bool isMove = false;
     private Coroutine coroutineInstance;
@@ -26,6 +30,7 @@ public sealed class JoystickController : AbstractController
             joystick.onPointerDown += () => { isMove = true; };
             joystick.onPointerUp += () => { isMove = false; };
             coroutineInstance = StartCoroutine(ControllerCoroutine());
+            IsInit = true;
         }
     }
 

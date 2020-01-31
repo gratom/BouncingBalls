@@ -5,21 +5,25 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerController : MonoBehaviour
 {
+    public delegate void JumpAction();
+
 #pragma warning disable
 
-    [HideInInspector] [SerializeField] private new Rigidbody rigidbody;
+    [HideInInspector] [SerializeField] public new Rigidbody rigidbody { get; private set; }
     [SerializeField] private AbstractController controller;
 
 #pragma warning restore
 
     public Vector2 ImpulsMultiplier;
     public float JumpForce;
+    public JumpAction jumpAction;
     private Coroutine controlCoroutineInstance;
 
     #region Unity functions
 
     private void Awake()
     {
+        jumpAction = StandartJump;
         controller.AddListeners(Move, Jump);
     }
 
@@ -32,9 +36,23 @@ public class PlayerController : MonoBehaviour
 
     #endregion Unity functions
 
+    #region public functions
+
+    public void ResetJumpAction()
+    {
+        jumpAction = StandartJump;
+    }
+
+    #endregion public functions
+
     #region private functions
 
     private void Jump()
+    {
+        jumpAction?.Invoke();
+    }
+
+    private void StandartJump()
     {
         rigidbody.AddForce(new Vector3(rigidbody.velocity.x * 2f, JumpForce));
     }
