@@ -11,6 +11,8 @@ public class Player : MonoBehaviour
     [SerializeField] private PlayerObstacle playerObstacle;
 #pragma warning restore
 
+    private bool isChained = false;
+
     #region Unity functions
 
     private void Awake()
@@ -32,15 +34,28 @@ public class Player : MonoBehaviour
 
     private void OnEnter(AbstractMapObject mapObject)
     {
-        if (mapObject.UseAction != null)
+        if (!isChained)
         {
-            playerController.jumpAction = () =>
+            if (mapObject.UseAction != null)
             {
-                mapObject.UseAction(this);
-                playerController.ResetJumpAction();
-            };
+                playerController.JumpAction = () =>
+                {
+                    mapObject.UseAction(this);
+                    PlayerController.ResetBehaviour();
+                    isChained = false;
+                };
+                isChained = true;
+            }
+            if (mapObject.MoveAction != null)
+            {
+                playerController.MoveAction = (x) =>
+                {
+                    mapObject.MoveAction(this, x);
+                };
+                isChained = true;
+            }
+            mapObject.EnterAction?.Invoke(this);
         }
-        mapObject.EnterAction?.Invoke(this);
     }
 
     private void OnExit(AbstractMapObject mapObject)

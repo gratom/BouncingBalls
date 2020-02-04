@@ -2,17 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class JumpMapObject : MonoBehaviour
+public class JumpMapObject : AbstractMapObject
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+#pragma warning disable
 
-    // Update is called once per frame
-    void Update()
+    [SerializeField] private float ForceMultiplier;
+
+#pragma warning restore
+
+    public override MapObjectDelegate EnterAction => (player) =>
     {
-        
-    }
+        player.PlayerController.Rig.velocity = Vector2.Reflect(player.PlayerController.Rig.velocity, transform.right);
+    };
+
+    public override MapObjectDelegate ExitAction => null;
+
+    public override MapObjectDelegate UseAction => null;
+
+    public override MapObjectMoveDelegate MoveAction => null;
 }
