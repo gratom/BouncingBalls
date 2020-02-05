@@ -448,6 +448,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1811312078}
   - component: {fileID: 1811312077}
+  - component: {fileID: 1811312079}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -467,6 +468,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5ca6d9cc405c444bb53dcce221373eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  settingController: {fileID: 1811312079}
 --- !u!4 &1811312078
 Transform:
   m_ObjectHideFlags: 0
@@ -481,3 +483,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1811312079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1811312076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 104ab20751266054aa52f1192117dbb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DefaultSetting: {fileID: 11400000, guid: c2c66c772a3e721498ea7b13cce33ab8, type: 2}
+  settings:
+    audio:
+      IsMusicPlay: 0
+      IsSoundPlay: 0
+    playerMovement:
+      ImpulsMutiplier: {x: 0, y: 0}
+      JumpForce: 0

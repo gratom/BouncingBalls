@@ -37,7 +37,15 @@ public class RopeMapObject : AbstractMapObject
         }
         set
         {
-            _pointOfPlayer = value > ropeLength ? ropeLength : value;
+            _pointOfPlayer = value;
+            if (_pointOfPlayer > ropeLength)
+            {
+                _pointOfPlayer = ropeLength;
+            }
+            if (_pointOfPlayer < 0)
+            {
+                _pointOfPlayer = 0;
+            }
         }
     }
 
@@ -107,7 +115,7 @@ public class RopeMapObject : AbstractMapObject
     private void InitiateRopeParts()
     {
         Ropes = new List<RopePart>(PartCount);
-        ropeLength = PartCount * PartDistance;
+        ropeLength = (PartCount - 1) * PartDistance;
         line.positionCount = 2;
         line.SetPosition(0, transform.position);
         line.SetPosition(1, transform.position);
@@ -190,6 +198,10 @@ public class RopeMapObject : AbstractMapObject
     private bool CheckRepose()
     {
         if (playerInstance != null)
+        {
+            return true;
+        }
+        if (Mathf.Abs(Ropes[Ropes.Count - 1].transform.localPosition.x) > ReposeMagnityde)
         {
             return true;
         }

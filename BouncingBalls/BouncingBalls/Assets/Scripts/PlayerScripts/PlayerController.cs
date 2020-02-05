@@ -28,6 +28,11 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
+        if (GameManager.Instance != null)
+        {
+            ImpulsMultiplier = GameManager.Instance.settingController.settings.playerMovement.ImpulsMutiplier;
+            JumpForce = GameManager.Instance.settingController.settings.playerMovement.JumpForce;
+        }
         ResetBehaviour();
         controller.AddListeners(Move, Jump);
     }

@@ -6,6 +6,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
+    public SettingController settingController;
+
     private void Awake()
     {
         Init();
@@ -16,6 +18,7 @@ public class GameManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
+            settingController.Init();
             DontDestroyOnLoad(gameObject);
             StartCoroutine(LoadingCoroutine(2));
         }
